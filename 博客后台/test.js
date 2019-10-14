@@ -1,0 +1,45 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-22 09:39:33
+ * @LastEditTime: 2019-09-04 10:00:01
+ * @LastEditors: Please set LastEditors
+ */
+const http = require("http")
+const querystring = require("querystring")
+
+http
+    .createServer((req, res) => {
+        const method = req.method
+        const url = req.url
+        const path = url.split("?")[0]
+        const query = querystring.parse(url.split("?")[1])
+
+        // 设置返回格式为 JSON
+        res.setHeader("Content-Type", "application/json")
+
+        // 返回的数据
+        const resData = {
+            method,
+            url,
+            path,
+            query
+        }
+
+        // 返回
+        if (method === "GET") {
+            res.end(JSON.stringify(resData))
+        } else if (method === "POST") {
+            let postData = ""
+            req.on("data", chunk => {
+                postData += chunk.toString()
+            })
+            req.on("end", () => {
+                resData.postData = postData
+                res.end(JSON.stringify(resData))
+            })
+        }
+    })
+    .listen(3000, () => {
+        console.log("server is running...")
+    })
