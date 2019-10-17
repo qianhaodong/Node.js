@@ -1,36 +1,42 @@
 const env = process.env.NODE_ENV; // 环境参数
 
 // 配置
-let MONGODB_CONF;
+let MYSQL_CONF;
 let REDIS_CONF;
 
 if (env === "dev") {
-	// mongodb
-	MONGODB_CONF = {
+	// mysql
+	MYSQL_CONF = {
 		host: "localhost",
-		database: "blog"
+		user: 'root',
+		password: '123456',
+		prot: '3306',
+		database: 'blog'
 	};
 
 	// redis
 	REDIS_CONF = {
 		port: 6379,
-		host: "127.0.0.1"
+		host: "localhost"
 	};
 }
 
 if (env === "production") {
-	REDIS_CONF = {
-		port: 6379,
-		host: "127.0.0.1"
+	MYSQL_CONF = {
+		host: "localhost",
+		user: 'root',
+		password: '123456',
+		prot: '3306',
+		database: 'blog'
 	};
 
-	MONGODB_CONF = {
-		host: "localhost",
-		database: "blog"
+	REDIS_CONF = {
+		port: 6379,
+		host: "localhost"
 	};
 }
 
 module.exports = {
-	MONGODB_CONF,
+	MYSQL_CONF,
 	REDIS_CONF
 };

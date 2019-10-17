@@ -7,7 +7,7 @@ let REDIS_CONF;
 if (env === "dev") {
 	// mongodb
 	MONGODB_CONF = {
-		host: "localhost",
+		host: "127.0.0.1",
 		database: "blog"
 	};
 
@@ -21,11 +21,11 @@ if (env === "dev") {
 if (env === "production") {
 	REDIS_CONF = {
 		port: 6379,
-		host: "127.0.0.1"
+		host: "qianhaodong.com"
 	};
 
 	MONGODB_CONF = {
-		host: "localhost",
+		host: "qianhaodong.com",
 		database: "blog"
 	};
 }

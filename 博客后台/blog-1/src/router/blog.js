@@ -81,7 +81,7 @@ const handleBlogRouter = (req, res) => {
 			return loginCheckResult;
 		}
 
-		const id = req.body.id;
+		const id = req.query.id;
 		return updateBlog(id, req.body)
 			.then(() => {
 				return new SuccessModel("更新博客成功");

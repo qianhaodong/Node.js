@@ -2,15 +2,16 @@ const { exec, escape } = require('../db/mysql');
 const { genPassword } = require('../utils/cryp');
 
 // 用户注册
-const register = (userInfo = {}) => {
-    const { username, password, realname } = userInfo;
-    
-    const sql = `
+const register = (username, password, realname) => {
+	// let { username, password, realname } = userInfo;
+
+	password = genPassword(password);
+	const sql = `
         INSERT INTO users (username, password, realname)
         VALUES ('${username}', '${password}', '${realname}');
-    `
+    `;
 
-    return exec(sql)
+	return exec(sql);
 };
 
 // 用户登录
